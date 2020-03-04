@@ -1,0 +1,33 @@
+{
+  "name": "move_util",
+  "description": "A utility to move files based on a substring in their pathname",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node .",
+    "build": "pkg ."
+  },
+  "repository": "https://github.com/glennfaison/move_util",
+  "keywords": [
+    "Electron",
+    "move_util"
+  ],
+  "license": "ISC",
+  "author": "Glenn Faison",
+  "bin": "index.js",
+  "pkg": {
+    "assets": [
+      "node_modules/**"
+    ],
+    "output": "build",
+    "targets": [
+      "node10-macos-x64",
+      "node10-win-x64"
+    ]
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0"
+  },
+  "devDependencies": {
+    "pkg": "^4.4.4"
+  }
+}

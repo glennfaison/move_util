@@ -1,0 +1,9 @@
+# node_modules
+**/node_modules/**
+
+# misc
+config*.json
+
+# system files
+**/.DS_Store
+**/Thumbs.db
