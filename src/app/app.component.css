@@ -9,9 +9,19 @@ body::after {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body, html {
+body,
+html {
   padding: none;
   margin: none;
+}
+
+#reference {
+  font-size: xx-small;
+  top: 0;
+}
+
+.position-absolute {
+  position: absolute;
 }
 
 .view-box {
@@ -23,6 +33,7 @@ body, html {
   justify-content: center;
   align-items: center;
 }
+
 .d-flex {
   display: flex;
 }
@@ -32,20 +43,25 @@ body, html {
   width: 80%;
   align-items: stretch;
 }
+
 .w-auto {
   flex-grow: 1;
 }
+
 .w-100 {
   width: 100%;
 }
+
 .col {
   display: flex;
   flex-direction: column;
 }
+
 .row {
   display: flex;
   flex-direction: row;
 }
+
 #top-box {
   justify-content: stretch;
 }
@@ -58,18 +74,23 @@ body, html {
   padding: 0.75em;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .pb-1 {
   padding-bottom: 1em;
 }
+
 .pt-1 {
   padding-top: 1em;
 }
+
 .pr-1 {
   padding-right: 1em;
 }
+
 .mr-1 {
   margin-right: 1em;
 }
+
 .text-center {
   text-align: center;
   justify-content: center;
