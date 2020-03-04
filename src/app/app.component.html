@@ -7,31 +7,38 @@
     <!-- Title -->
     <h1 class="row w-100 text-center">Move Util</h1>
 
-    <!-- Box on the LHS of the middle box -->
-    <div id="left-box" class="col w-auto">
+    <!-- Box at the top of the middle box -->
+    <div id="top-box" class="col w-auto">
 
       <!-- Form -->
-      <fieldset id="form" class="d-flex">
+      <fieldset id="form" class="d-flex pt-1 pr-1">
         <legend>Enter Details</legend>
 
         <!-- Form Group for substring -->
         <div class="pb-1">
-          <label for="substring" class="row">Substring:</label>
+          <label for="substring" class="row" title="The substring that you are looking for in a filename">
+            Substring:
+          </label>
           <input type="text" class="row w-100" name="substring" id="substring" [(ngModel)]="substring" />
         </div>
         <!-- End form group for substring -->
 
         <!-- Form Group for source folder -->
         <div class="pb-1">
-          <label for="sourceFolder" class="row">Source Folder</label>
+          <label for="sourceFolder" class="row" title="The full path to the source folder">
+            Source Folder
+          </label>
           <input type="text" class="row w-100" name="sourceFolder" id="sourceFolder" [(ngModel)]="sourceFolder" />
         </div>
         <!-- End form group for source folder -->
 
         <!-- Form Group for destination folder -->
         <div class="pb-1">
-          <label for="destinationFolder" class="row">Destination Folder</label>
-          <input type="text" class="row w-100" name="destinationFolder" id="destinationFolder" [(ngModel)]="destinationFolder" />
+          <label for="destinationFolder" class="row" title="The full path to the destination folder">
+            Destination Folder
+          </label>
+          <input type="text" class="row w-100" name="destinationFolder" id="destinationFolder"
+            [(ngModel)]="destinationFolder" />
         </div>
         <!-- End form group for destination folder -->
 
@@ -46,21 +53,14 @@
       <!-- End form -->
 
     </div>
-    <!-- End left-box -->
+    <!-- End top-box -->
 
-    <!-- Box on the RHS of the middle box -->
-    <!-- <div id="right-box" class="col w-auto">
-      <span>
-        <pre>
-          &#123;
-            substring: "{{ substring }}",
-            sourceFolder: "{{ sourceFolder }}",
-            destinationFolder: "{{ destinationFolder }}"
-          &#125;
-        </pre>
+    <!-- Box at the bottom of the middle box -->
+    <div id="bottom-box" class="col w-auto">
+      <span id="logs" class="col w-100">
       </span>
-    </div> -->
-    <!-- End right-box -->
+    </div>
+    <!-- End bottom-box -->
 
   </div>
   <!-- End mid-box -->

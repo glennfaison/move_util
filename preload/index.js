@@ -1,4 +1,4 @@
-const { run, fetchConfigFromUI } = require('./move_util')
+const { run, fetchConfigFromUI, ft } = require('./move_util')
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -19,7 +19,28 @@ window.addEventListener('DOMContentLoaded', () => {
     const destinationFolder = document.getElementsByName('destinationFolder')[0].value
 
     const config = fetchConfigFromUI({substring, sourceFolder, destinationFolder})
+
     run(config)
+  })
+
+  const createDiv = (innerHtml) => {
+    const div = document.createElement('div')
+    div.innerHTML = innerHtml
+    return div
+  }
+
+  const logsSpan = document.getElementById('logs')
+  ft.on('message', (msg) => {
+    logsSpan.appendChild(createDiv(msg))
+  })
+  ft.on('error', (msg) => {
+    logsSpan.appendChild(createDiv(msg).style.color = 'red')
+  })
+  ft.on('start', (msg) => {
+    logsSpan.appendChild(createDiv(msg))
+  })
+  ft.on('end', (msg) => {
+    logsSpan.appendChild(createDiv(msg))
   })
 
 })

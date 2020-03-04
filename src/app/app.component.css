@@ -1,7 +1,7 @@
 body,
 body::before,
 body::after {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #333;
   box-sizing: border-box;
@@ -46,15 +46,23 @@ body, html {
   display: flex;
   flex-direction: row;
 }
-#left-box {
+#top-box {
   justify-content: stretch;
 }
 
-#right-box {
-  justify-content: stretch;
+#bottom-box {
+  padding: 1px;
+  max-height: 100px;
+  overflow: scroll;
+  font-size: xx-small;
+  padding: 0.75em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .pb-1 {
   padding-bottom: 1em;
+}
+.pt-1 {
+  padding-top: 1em;
 }
 .pr-1 {
   padding-right: 1em;

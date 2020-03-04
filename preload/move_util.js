@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const fsx = require('fs-extra');
+const { EventEmitter } = require('events');
+class FileTransferEmitter extends EventEmitter {}
+
+const ft = new FileTransferEmitter();
 
 
 function cleanupConfigObject(config) {
@@ -42,10 +46,16 @@ async function moveFile(filename, sourceFolder, destinationFolder) {
   const destinationPath = path.join(destinationFolder, filename);
   try {
     await fsx.copy(sourcePath, destinationPath);
-    fsx.remove(sourcePath);
+    ft.emit('start', `Copied ${filename} from ${sourceFolder} to ${destinationFolder}`);
   } catch (error) {
-    fsx.remove(destinationPath);
+    ft.emit('error', `Error while copying ${filename} from ${sourceFolder} to ${destinationFolder}`);
+    ft.emit('message', `Removing ${filename} copy from ${destinationFolder}`);
+    await fsx.remove(destinationPath).catch();
+    ft.emit('end', `Removed ${filename} copy from ${destinationFolder}`);
   }
+  ft.emit('message', `Removing old ${filename} from ${sourceFolder}`);
+  await fsx.remove(sourcePath).catch();
+  ft.emit('end', `Removed old ${filename} from ${sourceFolder}`);
 }
 
 async function run(config) {
@@ -56,14 +66,21 @@ async function run(config) {
   }
 
   const dirs = await fetchSubfolders(config.sourceFolder);
-  dirs.forEach(dir => {
-    if (dir.includes(config.substring)) {
-      moveFile(dir, config.sourceFolder, config.destinationFolder);
-    }
-  });
+
+  const dirsToMove = dirs.filter(dir => dir.includes(config.substring));
+  const promises = dirsToMove.map(dir => moveFile(dir, config.sourceFolder, config.destinationFolder));
+  // Emit event for start of transfer
+  ft.emit('message', 'Transfers started...');
+  Promise.all(promises).then(() => {
+    ft.emit('message', `Finished moving files`);
+  }).catch(e => {
+    ft.emit('error', 'Some errors were encountered:');
+    ft.emit('error', e);
+  })
 };
 
 module.exports = {
   run: run,
   fetchConfigFromUI: fetchConfigFromUI,
+  ft: ft,
 }
